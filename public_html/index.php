@@ -8,5 +8,5 @@ register_shutdown_function(function() {
 	}
 });
 
-echo Router::Route("/");
+echo Router::Route();
 ?>

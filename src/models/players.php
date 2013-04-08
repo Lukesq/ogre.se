@@ -1,5 +1,6 @@
 <?php
 require_once dirname(__FILE__) . "/../db/db.php";
+require_once dirname(__FILE__) . "/../pkg/runecrawler/crawler.php";
 
 class Players {
 	static function GetAllPlayers() {
@@ -35,6 +36,26 @@ class Players {
 			return $player;
 		}
 		else {
+			return false;
+		}
+	}
+	
+	static function AddPlayer($name) {
+		if (!Crawler::Fetch($name)) {
+			return false;
+		}
+		global $db;
+		$sql = "
+		INSERT INTO player(name)
+		VALUES (?)
+		";
+		$query = $db->prepare($sql);
+		$query->execute([
+			$name
+		]);
+		if ($query->rowCount() != 0) {
+			return $db->lastInsertId("player_id_seq");
+		} else {
 			return false;
 		}
 	}

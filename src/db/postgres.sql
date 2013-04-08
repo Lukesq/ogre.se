@@ -8,12 +8,18 @@ CREATE TABLE player (
 	active     boolean default true
 );
 
+CREATE UNIQUE INDEX player_name_index
+ON player(name);
+
 DROP TABLE IF EXISTS highscore CASCADE;
 CREATE TABLE highscore (
 	id        serial primary key,
 	player_id int references player(id),
 	time      timestamp with time zone default date_trunc('minute', now())
 );
+
+CREATE INDEX highscore_time_index
+ON highscore(time);
 
 DROP TABLE IF EXISTS highscore_stats;
 CREATE TABLE highscore_stats (
@@ -24,3 +30,6 @@ CREATE TABLE highscore_stats (
 	level        int,
 	xp           int
 );
+
+CREATE INDEX highscore_stats_skill_index
+ON highscore_stats(skill);
