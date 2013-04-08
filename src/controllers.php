@@ -1,4 +1,5 @@
 <?php
+require_once "utils.php";
 require_once "pkg/route/route.php";
 
 function __autoload($class) {
@@ -8,10 +9,14 @@ function __autoload($class) {
 }
 
 Router::AddRoutes([
-	"/" => ["function" => "Highscore"]
+	"/" => ["function" => "Browse"]
 ]);
 
-function Highscore() {
-	return "Hello, world.";
+function Browse() {
+	return Import(
+		"../views/share/masterpage.php", [
+			"body" => Import("../views/highscore/browse.php")
+		]
+	);
 }
 ?>

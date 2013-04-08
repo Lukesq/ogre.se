@@ -19,22 +19,18 @@ echo "Fetching..\n";
 
 foreach (Players::GetAllPlayers() as $player) {
 	extract($player);
-
 	set_time_limit(0);
 	echo "* ";
-
 	$values = Crawler::Fetch($name);
 	if (!$values) {
 		echo "'$name' failure\n";
 		continue;
 	}
-	
 	Highscores::SaveHighscore(
 		$id,
 		$time,
 		$values
 	);
-	
 	echo "'$name' success\n";
 }
 
