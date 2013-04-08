@@ -2,6 +2,74 @@
 require_once dirname(__FILE__) . "/../db/db.php";
 
 class Highscores {
+	static function GetPlayer($player_id, $time) {
+		global $db;
+		$sql = "
+		SELECT
+			skill,
+			rank,
+			level,
+			xp
+		FROM (
+			SELECT DISTINCT ON(player_id) * FROM highscore
+			WHERE time <= ?
+			AND player_id = ?
+			ORDER BY player_id
+			DESC
+		) AS highscore
+		JOIN highscore_stats
+			ON highscore_id = highscore.id
+		";
+		$query = $db->prepare($sql);
+		$query->execute([
+			$time,
+			$player_id
+		]);
+		$highscore = $query->fetchAll(PDO::FETCH_ASSOC);
+		if ($highscore) {
+			return $highscore;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	static function GetSkill($skill, $time) {
+		global $db;
+		$sql = "
+		SELECT
+			name,
+			skill,
+			rank,
+			level,
+			xp
+		FROM (
+			SELECT DISTINCT ON(player_id) * FROM highscore
+			WHERE time <= ?
+			ORDER BY player_id
+			DESC
+		) AS highscore
+		JOIN player
+			on player_id = player.id
+		JOIN highscore_stats
+			ON highscore_id = highscore.id
+		WHERE skill = ?
+		ORDER BY rank
+		";
+		$query = $db->prepare($sql);
+		$query->execute([
+			$time,
+			$skill
+		]);
+		$highscore = $query->fetchAll(PDO::FETCH_ASSOC);
+		if ($highscore) {
+			return $highscore;
+		}
+		else {
+			return false;
+		}
+	}
+	
 	static function SaveHighscore($player_id, $time, array $stats) {
 		global $db;
 		$sql = "

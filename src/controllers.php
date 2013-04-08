@@ -14,14 +14,46 @@ function __autoload($class) {
 }
 
 Router::AddRoutes([
-	"/" => ["function" => "Browse"],
+	"/" => ["function" => "Skill", "skill" => "overall"],
+	"/skill/:skill" => ["function" => "Skill"],
+	"/:player" => ["function" => "Player"],
 	"/register" => ["function" => "Register"]
 ]);
 
-function Browse() {
+function Skill($args) {
+	$skill = &$args["skill"];
+	$highscore = Highscores::GetSkill($skill, Date::Tomorrow());
+	$data = [
+		"type" => "skill",
+		"title" => $skill,
+		"highscore" => $highscore
+	];
 	return Import(
 		"../views/share/masterpage.php", [
-			"body" => Import("../views/highscore/browse.php")
+			"body" => Import("../views/highscore/browse.php", $data)
+		]
+	);
+}
+
+function Player($args) {
+	extract($args);
+	$player = str_replace(
+		"+", 
+		" ",
+		$player
+	);
+	$highscore = Highscores::GetPlayer(
+		Players::GetPlayerIdByName($player),
+		Date::Tomorrow()
+	);
+	$data = [
+		"type" => "player",
+		"title" => $player,
+		"highscore" => $highscore
+	];
+	return Import(
+		"../views/share/masterpage.php", [
+			"body" => Import("../views/highscore/browse.php", $data)
 		]
 	);
 }
@@ -36,10 +68,7 @@ function Register() {
 	}
 	return Import(
 		"../views/share/masterpage.php", [
-			"body" => Import(
-				"../views/highscore/register.php",
-				$data
-			)
+			"body" => Import("../views/highscore/register.php", $data)
 		]
 	);
 }

@@ -138,7 +138,8 @@ class Skills {
 		foreach (Skills::$levels as $k => $v) {
 			if ($v <= $xp) {
 				$lvl = $k;
-			} else {
+			}
+			else {
 				break;
 			}
 		}

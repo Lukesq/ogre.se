@@ -55,7 +55,8 @@ class Players {
 		]);
 		if ($query->rowCount() != 0) {
 			return $db->lastInsertId("player_id_seq");
-		} else {
+		}
+		else {
 			return false;
 		}
 	}
