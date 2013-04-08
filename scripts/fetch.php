@@ -28,7 +28,13 @@ foreach (Players::GetAllPlayers() as $player) {
 		echo "'$name' failure\n";
 		continue;
 	}
-
+	
+	Highscores::SaveHighscore(
+		$id,
+		$time,
+		$values
+	);
+	
 	echo "'$name' success\n";
 }
 

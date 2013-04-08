@@ -147,12 +147,10 @@ class Skills {
 	
 	static function XPToNextLevel($xp) {
 		$lvl = Skills::Level($xp);
-		
 		$left = 0;
 		if ($lvl != 99) {
 			$left = Skills::$levels[$lvl + 1] - $xp;
 		}
-		
 		return $left;
 	}
 	
@@ -160,10 +158,8 @@ class Skills {
 		if ($lvl == 99) {
 			return 100;
 		}
-		
 		$next = Skills::$levels[$lvl + 1] - Skills::$levels[$lvl];
 		$done = $xp - Skills::$levels[$lvl];
-		
 		if ($next == 0) {
 			return 0;
 		}
