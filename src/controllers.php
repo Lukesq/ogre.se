@@ -31,7 +31,7 @@ function Skill($args) {
 	return Import(
 		"../views/share/masterpage.php", [
 			"body" => Import("../views/highscore/browse.php", $data)
-		]
+		] + $data
 	);
 }
 
@@ -42,10 +42,8 @@ function Player($args) {
 		" ",
 		$player
 	);
-	$highscore = Highscores::GetPlayer(
-		Players::GetPlayerIdByName($player),
-		Date::Tomorrow()
-	);
+	$player_id = Players::GetPlayerIdByName($player);
+	$highscore = Highscores::GetPlayer($player_id, Date::Tomorrow());
 	$data = [
 		"type" => "player",
 		"title" => $player,
@@ -54,7 +52,7 @@ function Player($args) {
 	return Import(
 		"../views/share/masterpage.php", [
 			"body" => Import("../views/highscore/browse.php", $data)
-		]
+		] + $data
 	);
 }
 
@@ -69,7 +67,7 @@ function Register() {
 	return Import(
 		"../views/share/masterpage.php", [
 			"body" => Import("../views/highscore/register.php", $data)
-		]
+		] + $data
 	);
 }
 ?>

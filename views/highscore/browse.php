@@ -9,12 +9,12 @@ function color($num) {
 }
 ?>
 <div id="browse">
-	<h1>
+	<h2>
 		<?php
 		echo ucwords($title);
 		?> 
-	</h1>
-	<table id="highscore">
+	</h2>
+	<table id="highscore" cellpadding="0" cellspacing="0">
 	
 	<thead>
 		<tr>

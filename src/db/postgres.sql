@@ -4,8 +4,7 @@ DROP TABLE IF EXISTS player CASCADE;
 CREATE TABLE player (
 	id         serial primary key,
 	name       varchar(32),
-	date_added timestamp with time zone default date_trunc('minute', now()),
-	active     boolean default true
+	date_added timestamp with time zone default date_trunc('minute', now())
 );
 
 CREATE UNIQUE INDEX player_name_index
