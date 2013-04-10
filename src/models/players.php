@@ -41,7 +41,7 @@ class Players {
 	}
 	
 	static function AddPlayer($name) {
-		if (!Crawler::Fetch($name)) {
+		if (!$crawl = Crawler::Fetch($name)) {
 			return false;
 		}
 		global $db;
@@ -54,7 +54,13 @@ class Players {
 			$name
 		]);
 		if ($query->rowCount() != 0) {
-			return $db->lastInsertId("player_id_seq");
+			$player_id = $db->lastInsertId("player_id_seq");
+			Highscores::SaveHighscore(
+				$player_id,
+				Date::Today(),
+				$crawl
+			);
+			return $player_id;
 		}
 		else {
 			return false;

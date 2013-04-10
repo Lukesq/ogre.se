@@ -20,9 +20,9 @@ function __autoload($class) {
 
 Router::AddRoutes([
 	"/" => ["function" => "Skill", "skill" => "overall"],
+	"/register" => ["function" => "Register"],
 	"/skill/:skill" => ["function" => "Skill"],
-	"/:player" => ["function" => "Player"],
-	"/register" => ["function" => "Register"]
+	"/:player" => ["function" => "Player"]
 ]);
 
 function Skill($args) {
@@ -73,8 +73,11 @@ function Register() {
 	$data = [];
 	if (REQUEST == "POST") {
 		$name = &$_POST["name"];
+		if ($success = Players::AddPlayer($name)) {
+			header("Refresh: 2; url=/");
+		}
 		$data += [
-			"success" => Players::AddPlayer($name)
+			"success" => $success
 		];
 	}
 	return Import(

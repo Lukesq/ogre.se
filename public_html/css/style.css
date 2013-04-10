@@ -18,6 +18,20 @@ th {
 h1, h2, h3 {
 	margin: 0px;
 }
+label {
+	display: block;
+}
+input, button {
+	background: none;
+	border: none;
+	font: inherit;
+	margin: 0px;
+	outline: none;
+	padding: 0px;
+}
+.unchanged {
+	color: #998f76;
+}
 .positive {
 	color: #2e7209;
 }
@@ -34,18 +48,29 @@ h1, h2, h3 {
 	opacity: 0.6;
 	height: 12px;
 }
-#skills {
+#header {
 	margin: 0px auto;
 	overflow: hidden;
-	width: 136px;
+	width: 640px;
 }
-#skills a {
+#header a {
 	color: #d9c27e;
 	padding: 8px 12px;
 }
+#header a:hover {
+	color: #ebd594;
+}
+#header .register {
+	float: left;
+	margin-top: 9px;
+	margin-left: 40px;
+}
+#skills {
+	float: left;
+	margin-left: 180px;
+}
 #skills a:hover {
 	background: #67735c;
-	color: #ebd594;
 }
 #skills li {
 	float: left;
@@ -102,15 +127,19 @@ h1, h2, h3 {
 #contents h2 {
 	font-size: 22px;
 	margin-bottom: 20px;
+}
+#browse h2 {
+	margin-top: -10px;
 	text-align: center;
 }
-#contents small {
+#browse small {
 	display: block;
 	font-size: 11px;
 	text-align: center;
 	margin: -10px 0px 20px;
 }
 #date-switch {
+	margin-top: 10px;
 	position: absolute;
 	width: 560px;
 }
@@ -140,5 +169,38 @@ h1, h2, h3 {
 }
 #highscore .empty {
 	padding-top: 20px;
+	text-align: center;
+}
+#register {
+	margin: 0px auto -10px;
+	width: 260px;
+}
+#register form {
+	margin: 20px 0px;
+}
+#register input,
+#register button {
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	border-radius: 2px;
+	padding: 8px 12px;
+}
+#register input {
+	box-shadow: inset 0px 1px rgba(0, 0, 0, 0.1);
+	margin: 4px 0px;
+	width: 140px;
+}
+#register button {
+	box-shadow: 0px 1px rgba(0, 0, 0, 0.1);
+	font-weight: bold;
+	margin: 4px 0px;
+}
+#register button:hover {
+	background: rgba(0, 0, 0, 0.02);
+	cursor: pointer;
+}
+#register .error {
+	color: #a31616;
+}
+#register .success {
 	text-align: center;
 }

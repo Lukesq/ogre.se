@@ -13,7 +13,7 @@ function __autoload($class) {
 }
 
 date_default_timezone_set("Europe/Stockholm");
-$time = date("Y-m-d H:i") . "+01";
+$time = date("Y-m-d H:i");
 
 echo "Fetching..\n";
 
@@ -21,15 +21,15 @@ foreach (Players::GetAllPlayers() as $player) {
 	extract($player);
 	set_time_limit(0);
 	echo "* ";
-	$values = Crawler::Fetch($name);
-	if (!$values) {
+	$crawl = Crawler::Fetch($name);
+	if (!$crawl) {
 		echo "'$name' failure\n";
 		continue;
 	}
 	Highscores::SaveHighscore(
 		$id,
 		$time,
-		$values
+		$crawl
 	);
 	echo "'$name' success\n";
 }

@@ -16,6 +16,9 @@
 		<a class="current" href="">
 		<span class="arrow"></span>
 		<?php
+		if (!isset($type)) {
+			$type = null;
+		}
 		if ($type == "skill") :
 		?>
 		<img src="/img/<?= $title; ?>.gif" width="16" height="16"/>
@@ -49,6 +52,9 @@
 		?> 
 		</ul>
 		
+		</div>
+		<div class="register">
+			<a href="/register">Registrera dig här</a>
 		</div>
 	</div>
 	
