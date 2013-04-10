@@ -2,12 +2,15 @@ server {
 	listen 80;
 	server_name ogre;
 	root /path/to/public_html;
+	
 	location / {
-		try_files $uri $uri/ /index.php?$query_string;
+		try_files $uri /index.php?$query_string;
 	}
+	
 	location /favicon.ico {
 	    empty_gif;
 	}
+	
 	location ~ \.php$ {
 		fastcgi_pass 127.0.0.1:9000;
 		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
