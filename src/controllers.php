@@ -20,6 +20,7 @@ function __autoload($class) {
 
 Router::AddRoutes([
 	"/" => ["function" => "Skill", "skill" => "overall"],
+	"/error" => ["function" => "Error"],
 	"/register" => ["function" => "Register"],
 	"/skill/:skill" => ["function" => "Skill"],
 	"/:player" => ["function" => "Player"]
@@ -27,6 +28,12 @@ Router::AddRoutes([
 
 function Skill($args) {
 	$skill = &$args["skill"];
+	if (!Skills::IsSkill($skill)) {
+		trigger_error(
+			"Skill '$skill' does not exist.",
+			E_USER_ERROR
+		);
+	}
 	$from = Date::Yesterday(DATE);
 	$to = DATE;
 	$data = [
@@ -38,8 +45,8 @@ function Skill($args) {
 		"highscore" => Highscores::GetSkill($skill, $to)
 	];
 	return Import(
-		"../views/share/masterpage.php", [
-			"body" => Import("../views/highscore/browse.php", $data)
+		"../views/masterpage.php", [
+			"body" => Import("../views/browse.php", $data)
 		] + $data
 	);
 }
@@ -52,6 +59,12 @@ function Player($args) {
 		$player
 	);
 	$player_id = Players::GetPlayerIdByName($player);
+	if (!$player_id) {
+		trigger_error(
+			"Player '$player' does not exist.",
+			E_USER_ERROR
+		);
+	}
 	$from = Date::Yesterday(DATE);
 	$to = DATE;
 	$data = [
@@ -63,8 +76,8 @@ function Player($args) {
 		"highscore" => Highscores::GetPlayer($player_id, $to)
 	];
 	return Import(
-		"../views/share/masterpage.php", [
-			"body" => Import("../views/highscore/browse.php", $data)
+		"../views/masterpage.php", [
+			"body" => Import("../views/browse.php", $data)
 		] + $data
 	);
 }
@@ -81,9 +94,17 @@ function Register() {
 		];
 	}
 	return Import(
-		"../views/share/masterpage.php", [
-			"body" => Import("../views/highscore/register.php", $data)
+		"../views/masterpage.php", [
+			"body" => Import("../views/register.php", $data)
 		] + $data
+	);
+}
+
+function Error() {
+	return Import(
+		"../views/masterpage.php", [
+			"body" => Import("../views/error.php")
+		]
 	);
 }
 ?>

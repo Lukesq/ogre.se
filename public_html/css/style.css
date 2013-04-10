@@ -78,7 +78,7 @@ input, button {
 }
 #skills img {
 	float: left;
-	margin: -1px 8px 0px 0px;
+	margin: -1px 8px -1px 0px;
 }
 #skills .arrow {
 	border: 5px solid transparent;
@@ -128,6 +128,9 @@ input, button {
 	font-size: 22px;
 	margin-bottom: 20px;
 }
+#error {
+	text-align: center;
+}
 #browse h2 {
 	margin-top: -10px;
 	text-align: center;
@@ -173,7 +176,7 @@ input, button {
 }
 #register {
 	margin: 0px auto -10px;
-	width: 260px;
+	width: 250px;
 }
 #register form {
 	margin: 20px 0px;

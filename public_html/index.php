@@ -1,12 +1,16 @@
 <?php
 require_once "../src/controllers.php";
 
+error_reporting(0);
 register_shutdown_function(function() {
 	$err = error_get_last();
 	if ($err !== null) {
-		// Catch fatal errors here
+		echo Router::Route("/error");
 	}
 });
 
-echo Router::Route();
+$url = $_SERVER["REQUEST_URI"];
+echo Router::Route(
+	$url
+);
 ?>
