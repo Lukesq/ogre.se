@@ -11,6 +11,11 @@
 	<body>
 	
 	<div id="header">
+		<h1 id="logo">
+			<a href="/">
+				<img src="/img/logo.png" width="156" height="54" alt="Ogre.se, Runescape Svensktoppen"/>
+			</a>
+		</h1>
 		<div id="skills">
 		
 		<a class="current" href="">
@@ -53,7 +58,7 @@
 		</ul>
 		
 		</div>
-		<div class="register">
+		<div id="registration">
 			<a href="/register">Registrera dig här</a>
 		</div>
 	</div>
@@ -62,6 +67,12 @@
 	<?php
 	echo $body;
 	?> 
+	</div>
+	
+	<div id="footer">
+		<div class="ogre">
+			<img src="/img/ogre.png" width="64" height="85" title="Why? Because fuck you, that's why!"/>
+		</div>
 	</div>
 	
 	<script src="/js/lib/jquery-1.9.1.min.js"></script>
