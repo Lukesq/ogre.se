@@ -14,6 +14,9 @@ function color($num) {
 		echo ucwords($title);
 		?> 
 	</h2>
+	<small>
+		visar resultat från <?= $from; ?> till <?= $to; ?>
+	</small>
 	<table id="highscore" cellpadding="0" cellspacing="0">
 	
 	<thead>
@@ -58,6 +61,9 @@ function color($num) {
 		<td>
 			<?php
 			$diff = 0;
+			if (isset($old[$key])) {
+				$diff = $old[$key]["rank"] - $rank;
+			}
 			echo number_format(
 				$rank
 			);
@@ -72,21 +78,25 @@ function color($num) {
 		</td>
 		<td>
 			<?php
-			$link = "/skill/$skill";
-			if ($type == "skill") {
-				$link = "/" . strtolower(str_replace(" ", "+", $name));
+			if ($type == "player") {
+				$link = "/skill/$key";
+			} else {
+				$link = "/" . strtolower(str_replace(" ", "+", $key));
 			}
 			?>
 			<a href="<?= $link; ?>">
 			<?php
-			echo ($type == "player") ? ucfirst($skill)
-				: ucwords($name);
+			echo ($type == "player") ? ucfirst($key)
+				: ucwords($key);
 			?> 
 			</a>
 		</td>
 		<td>
 			<?php
 			$diff = 0;
+			if (isset($old[$key])) {
+				$diff = $level - $old[$key]["level"];
+			}
 			echo number_format(
 				$level
 			);
@@ -94,7 +104,7 @@ function color($num) {
 		</td>
 		<td>
 			<?php
-			if ($title == "overall" or (!empty($skill) and $skill == "overall")) {
+			if ($title == "overall" or (!empty($key) and $key == "overall")) {
 				$done = round(
 					($level / 2277)
 					* 100
@@ -121,6 +131,9 @@ function color($num) {
 		<td>
 			<?php
 			$diff = 0;
+			if (isset($old[$key])) {
+				$diff = $xp - $old[$key]["xp"];
+			}
 			echo number_format(
 				$xp
 			);

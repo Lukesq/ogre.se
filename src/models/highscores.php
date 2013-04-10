@@ -1,12 +1,13 @@
 <?php
 require_once dirname(__FILE__) . "/../db/db.php";
+require_once dirname(__FILE__) . "/../utils.php";
 
 class Highscores {
 	static function GetPlayer($player_id, $time) {
 		global $db;
 		$sql = "
 		SELECT
-			skill,
+			skill AS key,
 			rank,
 			level,
 			xp
@@ -14,7 +15,9 @@ class Highscores {
 			SELECT DISTINCT ON(player_id) * FROM highscore
 			WHERE time <= ?
 			AND player_id = ?
-			ORDER BY player_id
+			ORDER BY
+				player_id,
+				time
 			DESC
 		) AS highscore
 		JOIN highscore_stats
@@ -27,7 +30,7 @@ class Highscores {
 		]);
 		$highscore = $query->fetchAll(PDO::FETCH_ASSOC);
 		if ($highscore) {
-			return $highscore;
+			return ArrayColumnValueAsKey("key", $highscore);
 		}
 		else {
 			return false;
@@ -38,15 +41,16 @@ class Highscores {
 		global $db;
 		$sql = "
 		SELECT
-			name,
-			skill,
+			name AS key,
 			rank,
 			level,
 			xp
 		FROM (
 			SELECT DISTINCT ON(player_id) * FROM highscore
 			WHERE time <= ?
-			ORDER BY player_id
+			ORDER BY
+				player_id,
+				time
 			DESC
 		) AS highscore
 		JOIN player
@@ -63,7 +67,7 @@ class Highscores {
 		]);
 		$highscore = $query->fetchAll(PDO::FETCH_ASSOC);
 		if ($highscore) {
-			return $highscore;
+			return ArrayColumnValueAsKey("key", $highscore);
 		}
 		else {
 			return false;

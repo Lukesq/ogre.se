@@ -12,4 +12,12 @@ function Import($file, array $args = []) {
 		return ob_get_clean();
 	}
 }
+
+function ArrayColumnValueAsKey($key, array $arr) {
+	$new = [];
+	foreach ($arr as $row) {
+		$new[$row[$key]] = $row;
+	}
+	return $new;
+}
 ?>

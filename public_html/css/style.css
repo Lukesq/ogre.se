@@ -103,6 +103,11 @@ h1, h2, h3 {
 	margin-bottom: 20px;
 	text-align: center;
 }
+#contents small {
+	display: block;
+	text-align: center;
+	margin: -10px 0px 20px;
+}
 #highscore {
 	margin: 0px auto;
 	width: 520px;

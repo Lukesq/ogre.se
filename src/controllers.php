@@ -22,11 +22,15 @@ Router::AddRoutes([
 
 function Skill($args) {
 	$skill = &$args["skill"];
-	$highscore = Highscores::GetSkill($skill, Date::Tomorrow());
+	$from = Date::Yesterday();
+	$to = Date::Today();
 	$data = [
 		"type" => "skill",
 		"title" => $skill,
-		"highscore" => $highscore
+		"from" => $from,
+		"to" => $to,
+		"old" => Highscores::GetSkill($skill, $from),
+		"highscore" => Highscores::GetSkill($skill, $to)
 	];
 	return Import(
 		"../views/share/masterpage.php", [
@@ -43,11 +47,15 @@ function Player($args) {
 		$player
 	);
 	$player_id = Players::GetPlayerIdByName($player);
-	$highscore = Highscores::GetPlayer($player_id, Date::Tomorrow());
+	$from = Date::Yesterday();
+	$to = Date::Today();
 	$data = [
 		"type" => "player",
 		"title" => $player,
-		"highscore" => $highscore
+		"from" => $from,
+		"to" => $to,
+		"old" => Highscores::GetPlayer($player_id, $from),
+		"highscore" => Highscores::GetPlayer($player_id, $to)
 	];
 	return Import(
 		"../views/share/masterpage.php", [
