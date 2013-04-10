@@ -9,13 +9,40 @@ function color($num) {
 }
 ?>
 <div id="browse">
+	<div id="date-switch">
+		<?php
+		$prev = Date::Yesterday($to);
+		if (!empty($highscore)) :
+		?> 
+		<a class="prev" href="?date=<?= $prev; ?>">
+			Föregående dag
+		</a>
+		<?php
+		endif;
+		$next = Date::Tomorrow($to);
+		if (strtotime($next) <= strtotime(Date::Today())) :
+		?> 
+		<a class="next" href="?date=<?= $next; ?>">
+			Nästa dag
+		</a>
+		<?php
+		endif;
+		?> 
+	</div>
 	<h2>
 		<?php
 		echo ucwords($title);
 		?> 
 	</h2>
 	<small>
-		visar resultat från <?= $from; ?> till <?= $to; ?>
+		<?php
+		$when = $to;
+		if ($to == Date::Today()) {
+			$when = "igår";
+		}
+		?>
+		visar resultatet från 
+		<strong><?= $when; ?></strong>
 	</small>
 	<table id="highscore" cellpadding="0" cellspacing="0">
 	
@@ -78,12 +105,14 @@ function color($num) {
 		</td>
 		<td>
 			<?php
+			$link = "?date=$to";
 			if ($type == "player") {
-				$link = "/skill/$key";
-			} else {
-				$link = "/" . strtolower(str_replace(" ", "+", $key));
+				$link = "/skill/$key" . $link;
 			}
-			?>
+			else {
+				$link = "/" . strtolower(str_replace(" ", "+", $key)) . $link;
+			}
+			?> 
 			<a href="<?= $link; ?>">
 			<?php
 			echo ($type == "player") ? ucfirst($key)

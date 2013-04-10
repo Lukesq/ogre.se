@@ -36,7 +36,7 @@
 			if (isset($title) and lcfirst($skill) == $title) {
 				$class = "active";
 			}
-			?>
+			?> 
 			<a class="<?= $class; ?>" href="<?= $link; ?>">
 			<img src="/img/<?= $skill; ?>.gif" width="16" height="16"/>
 			<?php

@@ -100,13 +100,28 @@ h1, h2, h3 {
 	width: 560px;
 }
 #contents h2 {
+	font-size: 22px;
 	margin-bottom: 20px;
 	text-align: center;
 }
 #contents small {
 	display: block;
+	font-size: 11px;
 	text-align: center;
 	margin: -10px 0px 20px;
+}
+#date-switch {
+	position: absolute;
+	width: 560px;
+}
+#date-switch a {
+	color: #565c51;
+}
+#date-switch a:hover {
+	color: #000;
+}
+#date-switch .next {
+	float: right;
 }
 #highscore {
 	margin: 0px auto;
@@ -115,8 +130,15 @@ h1, h2, h3 {
 #highscore a {
 	color: #000;
 }
+#highscore a:hover {
+	text-decoration: underline;
+}
 #highscore th,
 #highscore td {
 	padding: 4px;
 	text-align: left;
+}
+#highscore .empty {
+	padding-top: 20px;
+	text-align: center;
 }

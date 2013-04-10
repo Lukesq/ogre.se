@@ -6,6 +6,11 @@ define(
 	"REQUEST", 
 	$_SERVER["REQUEST_METHOD"]
 );
+define(
+	"DATE",
+	isset($_GET["date"]) ? date("Y-m-d", strtotime($_GET["date"]))
+		: Date::Today()
+);
 
 function __autoload($class) {
 	if (file_exists($path = "../src/models/" . strtolower($class) . ".php")) {
@@ -22,8 +27,8 @@ Router::AddRoutes([
 
 function Skill($args) {
 	$skill = &$args["skill"];
-	$from = Date::Yesterday();
-	$to = Date::Today();
+	$from = Date::Yesterday(DATE);
+	$to = DATE;
 	$data = [
 		"type" => "skill",
 		"title" => $skill,
@@ -47,8 +52,8 @@ function Player($args) {
 		$player
 	);
 	$player_id = Players::GetPlayerIdByName($player);
-	$from = Date::Yesterday();
-	$to = Date::Today();
+	$from = Date::Yesterday(DATE);
+	$to = DATE;
 	$data = [
 		"type" => "player",
 		"title" => $player,
