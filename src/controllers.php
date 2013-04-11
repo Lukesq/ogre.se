@@ -54,7 +54,7 @@ function Skill($args) {
 function Player($args) {
 	extract($args);
 	$player = str_replace(
-		"+", 
+		"_", 
 		" ",
 		$player
 	);

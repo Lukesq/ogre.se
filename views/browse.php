@@ -30,9 +30,7 @@ function color($num) {
 		?> 
 	</div>
 	<h2>
-		<?php
-		echo ucwords($title);
-		?> 
+		<pre><?= ucwords($title); ?></pre>
 	</h2>
 	<small>
 		<?php
@@ -110,14 +108,11 @@ function color($num) {
 				$link = "/skill/$key" . $link;
 			}
 			else {
-				$link = "/" . strtolower(str_replace(" ", "+", $key)) . $link;
+				$link = "/" . strtolower(str_replace(" ", "_", $key)) . $link;
 			}
 			?> 
 			<a href="<?= $link; ?>">
-			<?php
-			echo ($type == "player") ? ucfirst($key)
-				: ucwords($key);
-			?> 
+				<pre><?= ucwords($key); ?></pre>
 			</a>
 		</td>
 		<td>
@@ -190,4 +185,8 @@ function color($num) {
 	</tbody>
 	
 	</table>
+	<div id="stats">
+		<p><?= Players::GetPlayerCount(); ?> spelare</p>
+		<p>Ny dag räknas från kl 04:00</p>
+	</div>
 </div>

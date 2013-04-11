@@ -64,5 +64,21 @@ class Players {
 			return false;
 		}
 	}
+	
+	static function GetPlayerCount() {
+		global $db;
+		$sql = "
+		SELECT count(*) FROM player
+		";
+		$query = $db->prepare($sql);
+		$query->execute();
+		$count = $query->fetchColumn();
+		if ($count) {
+			return $count;
+		}
+		else {
+			return false;
+		}
+	}
 };
 ?>

@@ -8,6 +8,10 @@ a, img {
 	border: none;
 	text-decoration: none;
 }
+pre {
+	font: inherit;
+	margin: 0px;
+}
 ul, li {
 	list-style: none;
 	margin: 0px;
@@ -48,6 +52,12 @@ input, button {
 	background: #000;
 	opacity: 0.6;
 	height: 12px;
+}
+#github {
+	position: fixed;
+	opacity: 0.1;
+	right: 5px;
+	top: 5px;
 }
 #header {
 	margin: 0px auto;
@@ -126,9 +136,9 @@ input, button {
 	box-shadow: 0px 1px rgba(0, 0, 0, 0.075);
 	border-top: 1px solid rgba(255, 255, 255, 0.175);
 	border-radius: 2px;
-	margin: 20px auto;
+	margin: 20px auto 0px;
 	overflow: hidden;
-	padding: 40px 40px;
+	padding: 40px 40px 35px;
 	width: 560px;
 }
 #contents h2 {
@@ -181,6 +191,17 @@ input, button {
 	padding-top: 20px;
 	text-align: center;
 }
+#stats {
+	color: #565c51;
+	margin: 20px 25px 0px;
+	text-align: center;
+}
+#stats p {
+	margin: 0px;
+}
+#stats p + p {
+	margin-top: 6px;
+}
 #register {
 	margin: 0px auto -10px;
 	width: 250px;
@@ -215,6 +236,14 @@ input, button {
 	text-align: center;
 }
 #footer {
-	margin-top: 40px;
-	text-align: center;
+	color: #565c51;
+	margin: 10px auto;
+	width: 640px;
+}
+#footer p {
+	margin: 0px;
+}
+#footer .ogre {
+	margin-top: 30px;
+	text-align: center;	
 }
