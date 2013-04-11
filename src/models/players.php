@@ -1,5 +1,4 @@
 <?php
-require_once dirname(__FILE__) . "/../db/db.php";
 require_once dirname(__FILE__) . "/../pkg/runecrawler/crawler.php";
 
 class Players {
@@ -7,7 +6,6 @@ class Players {
 		global $db;
 		$sql = "
 		SELECT * FROM player
-		WHERE active
 		";
 		$query = $db->prepare($sql);
 		$query->execute();

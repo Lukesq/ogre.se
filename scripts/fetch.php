@@ -1,10 +1,16 @@
 <?php
-require_once dirname(__FILE__) . "/../src/pkg/runecrawler/crawler.php";
-
 // Only allow local execution.
 if (PHP_SAPI != "cli") {
 	die();
 }
+
+require_once dirname(__FILE__) . "/../config.php";
+require_once dirname(__FILE__) . "/../src/pkg/runecrawler/crawler.php";
+
+global $db;
+$db = new PDO(
+	$config["database"]
+);
 
 function __autoload($class) {
 	if (file_exists($path = dirname(__FILE__) . "/../src/models/" . strtolower($class) . ".php")) {
@@ -12,8 +18,8 @@ function __autoload($class) {
 	}
 }
 
-date_default_timezone_set("Europe/Stockholm");
-$time = date("Y-m-d H:i");
+date_default_timezone_set($config["timezone"]);
+$timestamp = date("Y-m-d H:i");
 
 echo "Fetching..\n";
 
@@ -28,7 +34,7 @@ foreach (Players::GetAllPlayers() as $player) {
 	}
 	Highscores::SaveHighscore(
 		$id,
-		$time,
+		$timestamp,
 		$crawl
 	);
 	echo "'$name' success\n";

@@ -1,7 +1,4 @@
 <?php
-require_once dirname(__FILE__) . "/../db/db.php";
-require_once dirname(__FILE__) . "/../utils.php";
-
 class Highscores {
 	static function GetPlayer($player_id, $time) {
 		global $db;

@@ -1,4 +1,5 @@
 <?php
+require_once "../config.php";
 require_once "../src/controllers.php";
 
 error_reporting(0);
@@ -8,6 +9,11 @@ register_shutdown_function(function() {
 		echo Router::Route("/error");
 	}
 });
+
+global $db;
+$db = new PDO(
+	$config["database"]
+);
 
 $url = $_SERVER["REQUEST_URI"];
 echo Router::Route(
