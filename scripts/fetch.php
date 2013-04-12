@@ -18,9 +18,7 @@ function __autoload($class) {
 	}
 }
 
-date_default_timezone_set($config["timezone"]);
 $timestamp = date("Y-m-d H:i");
-
 echo "Fetching..\n";
 
 foreach (Players::GetAllPlayers() as $player) {

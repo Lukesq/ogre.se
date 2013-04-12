@@ -1,7 +1,8 @@
 <?php
+date_default_timezone_set("Europe/Stockholm");
+
 global $config;
 $config = [
-	"timezone" => "Europe/Stockholm",
 	"database" => "pgsql:host=localhost;dbname=ogre.se;"
 ];
 
