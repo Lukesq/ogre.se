@@ -7,16 +7,16 @@ if (PHP_SAPI != "cli") {
 require_once dirname(__FILE__) . "/../config.php";
 require_once dirname(__FILE__) . "/../src/pkg/runecrawler/crawler.php";
 
-global $db;
-$db = new PDO(
-	$config["database"]
-);
-
 function __autoload($class) {
 	if (file_exists($path = dirname(__FILE__) . "/../src/models/" . strtolower($class) . ".php")) {
 		require_once $path;
 	}
 }
+
+global $db;
+$db = new PDO(
+	$config["database"]
+);
 
 $timestamp = date("Y-m-d H:i");
 echo "Fetching..\n";

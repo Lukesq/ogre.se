@@ -7,12 +7,6 @@ $db = new PDO(
 	$config["database"]
 );
 
-function __autoload($class) {
-	if (file_exists($path = "../src/models/" . strtolower($class) . ".php")) {
-		require_once $path;
-	}
-}
-
 try {
 	$url = $_SERVER["REQUEST_URI"];
 	echo Router::Route(

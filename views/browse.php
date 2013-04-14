@@ -20,7 +20,7 @@ function color($num) {
 		<?php
 		endif;
 		$next = Date::Tomorrow($to);
-		if (strtotime($next) <= strtotime(Date::Today())) :
+		if ($next <= Date::Today("-4 hours")) :
 		?> 
 		<a class="next" href="?date=<?= $next; ?>">
 			Nästa dag
@@ -34,8 +34,8 @@ function color($num) {
 	</h2>
 	<small>
 		<?php
-		$when = $to;
-		if ($to == Date::Today()) {
+		$when = date("Y-m-d", strtotime($to));
+		if ($when == Date::Today("-4 hours")) {
 			$when = "igår";
 		}
 		?>
@@ -47,29 +47,29 @@ function color($num) {
 	<thead>
 		<tr>
 		
-		<th>
+		<th width="50">
 			Rank
 		</th>
-		<th>
+		<th width="50">
 			+ / -
 		</th>
-		<th>
+		<th width="90">
 			<?php
 			echo ($type == "skill") ? "Name" 
 				: "Skill";
 			?> 
 		</th>
-		<th>
+		<th width="30">
 			Level
 		</th>
-		<th width="50"></th>
-		<th>
+		<th width="60"></th>
+		<th width="35">
 			+ / -
 		</th>
-		<th>
+		<th width="75">
 			XP
 		</th>
-		<th>
+		<th width="65">
 			+ / -
 		</th>
 		
@@ -105,10 +105,10 @@ function color($num) {
 			<?php
 			$link = "?date=$to";
 			if ($type == "player") {
-				$link = "/skill/$key" . $link;
+				$link = "/browse/skill/$key" . $link;
 			}
 			else {
-				$link = "/player/" . strtolower(str_replace(" ", "_", $key)) . $link;
+				$link = "/browse/player/" . strtolower(str_replace(" ", "_", $key)) . $link;
 			}
 			?> 
 			<a href="<?= $link; ?>">
@@ -198,7 +198,7 @@ function color($num) {
 		endif;
 		?> 
 		<p>
-			Ny dag räknas från kl 04:00
+		Ny dag räknas från kl 04:00
 		</p>
 	</div>
 </div>

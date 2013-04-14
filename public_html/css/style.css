@@ -236,14 +236,18 @@ input, button {
 	text-align: center;
 }
 #footer {
-	color: #565c51;
-	margin: 10px auto;
+	color: #474d42;
+	margin: 16px auto 60px;
+	text-align: center;
 	width: 640px;
 }
-#footer p {
-	margin: 0px;
+#footer a {
+	color: #d9c27e;
 }
-#footer .ogre {
-	margin-top: 30px;
-	text-align: center;	
+#footer a:hover {
+	color: #ebd594;
+}
+#footer li {
+	display: inline;
+	margin: 0px 5px;
 }

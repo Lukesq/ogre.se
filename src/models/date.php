@@ -1,7 +1,7 @@
 <?php
 class Date {
-	static function Today() {
-		return date("Y-m-d");
+	static function Today($offset = "now") {
+		return date("Y-m-d", strtotime($offset));
 	}
 	
 	static function Yesterday($day = null) {

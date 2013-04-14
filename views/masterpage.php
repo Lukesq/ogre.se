@@ -5,7 +5,8 @@
 	<meta charset="utf-8"/>
 	<title>Ogre — Svensktoppen</title>
 	
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="shortcut icon" href="/favicon.png"/>
+	<link rel="stylesheet" href="/css/style.css"/>
 	
 	</head>
 	<body>
@@ -46,10 +47,10 @@
 			}
 			?> 
 			<a class="<?= $class; ?>" href="<?= $link; ?>">
-			<img src="/img/<?= $skill; ?>.gif" width="16" height="16"/>
-			<?php
-			echo ucfirst($skill);
-			?> 
+				<img src="/img/<?= $skill; ?>.gif" width="16" height="16"/>
+				<?php
+				echo ucfirst($skill);
+				?> 
 			</a>
 		</li>
 		<?php
@@ -70,9 +71,25 @@
 	</div>
 	
 	<div id="footer">
-		<div class="ogre">
-			<img src="/img/ogre.png" width="64" height="85" title="Why? Because fuck you, that's why!"/>
-		</div>
+		<ul>
+		
+		<li>
+			© 2013 Ogre.se
+		</li>
+		<li>/</li>
+		<li>
+			<a target="_blank" href="https://github.com/erming/ogre.se">
+				GitHub
+			</a>
+		</li>
+		<li>/</li>
+		<li>
+			<a target="_blank" href="http://webchat.quakenet.org/?channels=runescape.se">
+				#runescape.se @ QuakeNet
+			</a>
+		</li>
+		
+		</ul>
 	</div>
 	
 	<script src="/js/lib/jquery-1.9.1.min.js"></script>
