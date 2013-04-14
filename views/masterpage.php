@@ -54,7 +54,7 @@
 		?> 
 		<li>
 			<?php
-			$link = "/skill/$skill";
+			$link = "/browse/skill/$skill";
 			$class = "";
 			if (isset($title) and lcfirst($skill) == $title) {
 				$class = "active";
