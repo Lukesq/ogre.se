@@ -108,7 +108,7 @@ function color($num) {
 				$link = "/skill/$key" . $link;
 			}
 			else {
-				$link = "/" . strtolower(str_replace(" ", "_", $key)) . $link;
+				$link = "/player/" . strtolower(str_replace(" ", "_", $key)) . $link;
 			}
 			?> 
 			<a href="<?= $link; ?>">
@@ -186,7 +186,19 @@ function color($num) {
 	
 	</table>
 	<div id="stats">
-		<p><?= Players::GetPlayerCount(); ?> spelare</p>
-		<p>Ny dag räknas från kl 04:00</p>
+		<?php
+		if ($type == "skill" && !empty($highscore)) :
+		?> 
+		<p>
+		<?php
+		echo count($highscore) . " spelare";
+		?> 
+		</p>
+		<?php
+		endif;
+		?> 
+		<p>
+			Ny dag räknas från kl 04:00
+		</p>
 	</div>
 </div>

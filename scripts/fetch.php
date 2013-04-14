@@ -30,11 +30,7 @@ foreach (Players::GetAllPlayers() as $player) {
 		echo "'$name' failure\n";
 		continue;
 	}
-	Highscores::SaveHighscore(
-		$id,
-		$timestamp,
-		$crawl
-	);
+	Highscores::SaveHighscore($id, $timestamp, $crawl);
 	echo "'$name' success\n";
 }
 

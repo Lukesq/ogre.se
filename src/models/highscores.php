@@ -1,70 +1,70 @@
 <?php
 class Highscores {
-	static function GetPlayer($player_id, $time) {
+	
+	static function GetHighscore($type, $value, $time) {
 		global $db;
-		$sql = "
-		SELECT
-			skill AS key,
-			rank,
-			level,
-			xp
-		FROM (
-			SELECT DISTINCT ON(player_id) * FROM highscore
-			WHERE time <= ?
-			AND player_id = ?
-			ORDER BY
-				player_id,
-				time
-			DESC
-		) AS highscore
-		JOIN highscore_stats
-			ON highscore_id = highscore.id
-		";
-		$query = $db->prepare($sql);
-		$query->execute([
-			$time,
-			$player_id
-		]);
-		$highscore = $query->fetchAll(PDO::FETCH_ASSOC);
-		if ($highscore) {
-			return ArrayColumnValueAsKey("key", $highscore);
-		}
-		else {
+		
+		switch ($type) {
+		case "player":
+			$sql = "
+			SELECT
+				skill AS key,
+				rank,
+				level,
+				xp
+			FROM (
+				SELECT DISTINCT ON(player_id) * FROM highscore
+				WHERE time <= ?
+				AND player_id = ?
+				ORDER BY
+					player_id,
+					time
+				DESC
+			) AS highscore
+			JOIN highscore_stats
+				ON highscore_id = highscore.id
+			";
+			break;
+		
+		case "skill":
+			$sql = "
+			SELECT
+				name AS key,
+				rank,
+				level,
+				xp
+			FROM (
+				SELECT DISTINCT ON(player_id) * FROM highscore
+				WHERE time <= ?
+				ORDER BY
+					player_id,
+					time
+				DESC
+			) AS highscore
+			JOIN player
+				on player_id = player.id
+			JOIN highscore_stats
+				ON highscore_id = highscore.id
+			WHERE skill = ?
+			ORDER BY rank
+			";
+			break;
+		
+		default:
 			return false;
 		}
-	}
-	
-	static function GetSkill($skill, $time) {
-		global $db;
-		$sql = "
-		SELECT
-			name AS key,
-			rank,
-			level,
-			xp
-		FROM (
-			SELECT DISTINCT ON(player_id) * FROM highscore
-			WHERE time <= ?
-			ORDER BY
-				player_id,
-				time
-			DESC
-		) AS highscore
-		JOIN player
-			on player_id = player.id
-		JOIN highscore_stats
-			ON highscore_id = highscore.id
-		WHERE skill = ?
-		ORDER BY rank
-		";
+		
 		$query = $db->prepare($sql);
 		$query->execute([
 			$time,
-			$skill
+			$value
 		]);
 		$highscore = $query->fetchAll(PDO::FETCH_ASSOC);
 		if ($highscore) {
-			return ArrayColumnValueAsKey("key", $highscore);
+			return ArrayColumnValueAsKey(
+				"key", 
+				$highscore
+			);
 		}
 		else {
 			return false;
@@ -82,23 +82,23 @@ class Highscores {
 			$player_id,
 			$time
 		]);
-		$highscore_id = $db->lastInsertId("highscore_id_seq");
+		
 		$sql = "
 		INSERT INTO highscore_stats(highscore_id, skill, rank, level, xp)
 		VALUES (?, ?, ?, ?, ?)
 		";
 		$query = $db->prepare($sql);
-		foreach ($stats as $k => $v) {
-			extract($v);
+		$highscore_id = $db->lastInsertId("highscore_id_seq");
+		foreach ($stats as $key => $value) {
+			extract($value);
 			$query->execute([
 				$highscore_id,
-				$k,
+				$key,
 				$rank,
 				$level,
 				$xp
 			]);
 		}
-		return true;
 	}
 };
 ?>

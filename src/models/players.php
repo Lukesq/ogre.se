@@ -9,6 +9,7 @@ class Players {
 		";
 		$query = $db->prepare($sql);
 		$query->execute();
+		
 		$players = $query->fetchAll(PDO::FETCH_ASSOC);
 		if ($players) {
 			return $players;
@@ -29,6 +30,7 @@ class Players {
 		$query->execute([
 			$name
 		]);
+		
 		$player = $query->fetchColumn();
 		if ($player) {
 			return $player;
@@ -42,6 +44,7 @@ class Players {
 		if (!$crawl = Crawler::Fetch($name)) {
 			return false;
 		}
+		
 		global $db;
 		$sql = "
 		INSERT INTO player(name)
@@ -51,6 +54,7 @@ class Players {
 		$query->execute([
 			$name
 		]);
+		
 		if ($query->rowCount() != 0) {
 			$player_id = $db->lastInsertId("player_id_seq");
 			Highscores::SaveHighscore(
@@ -72,6 +76,7 @@ class Players {
 		";
 		$query = $db->prepare($sql);
 		$query->execute();
+		
 		$count = $query->fetchColumn();
 		if ($count) {
 			return $count;
