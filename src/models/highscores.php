@@ -1,6 +1,5 @@
 <?php
 class Highscores {
-	
 	static function GetHighscore($type, $value, $time) {
 		global $db;
 		
@@ -8,7 +7,7 @@ class Highscores {
 		case "player":
 			$sql = "
 			SELECT
-				skill AS key,
+				skill AS name,
 				rank,
 				level,
 				xp
@@ -29,7 +28,7 @@ class Highscores {
 		case "skill":
 			$sql = "
 			SELECT
-				name AS key,
+				name,
 				rank,
 				level,
 				xp
@@ -42,7 +41,7 @@ class Highscores {
 				DESC
 			) AS highscore
 			JOIN player
-				on player_id = player.id
+				ON player_id = player.id AND player.active
 			JOIN highscore_stats
 				ON highscore_id = highscore.id
 			WHERE skill = ?
@@ -62,7 +61,7 @@ class Highscores {
 		$highscore = $query->fetchAll(PDO::FETCH_ASSOC);
 		if ($highscore) {
 			return ArrayColumnValueAsKey(
-				"key", 
+				"name", 
 				$highscore
 			);
 		}

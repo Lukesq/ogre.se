@@ -159,10 +159,8 @@ class Skills {
 		if ($lvl == 99) {
 			return 100;
 		}
-		
 		$next = Skills::$levels[$lvl + 1] - Skills::$levels[$lvl];
 		$done = $xp - Skills::$levels[$lvl];
-		
 		if ($next == 0) {
 			return 0;
 		}

@@ -19,7 +19,7 @@ define(
 );
 
 Router::AddRoutes([
-	"/error"                  => ["function" => "error"],
+	"/error"                  => ["function" => "Error"],
 	"/:function/:type/:param" => ["class" => "Highscore", "function" => "Browse", "type" => "skill", "param" => "overall"]
 ]);
 

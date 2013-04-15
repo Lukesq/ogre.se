@@ -12,7 +12,8 @@ try {
 	echo Router::Route(
 		$url
 	);
-} catch (Exception $e) {
+}
+catch (Exception $e) {
 	echo Router::Route(
 		"/error"
 	);

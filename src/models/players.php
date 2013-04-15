@@ -6,6 +6,7 @@ class Players {
 		global $db;
 		$sql = "
 		SELECT * FROM player
+		WHERE active
 		";
 		$query = $db->prepare($sql);
 		$query->execute();
@@ -46,23 +47,40 @@ class Players {
 		}
 		
 		global $db;
-		$sql = "
-		INSERT INTO player(name)
-		VALUES (?)
-		";
-		$query = $db->prepare($sql);
-		$query->execute([
-			$name
-		]);
+		$id = Players::GetPlayerIdByName($name);
+		
+		if (!$id) {
+			$sql = "
+			INSERT INTO player(name)
+			VALUES (?)
+			";
+			$query = $db->prepare($sql);
+			$query->execute([
+				$name
+			]);
+			if ($query->rowCount() != 0) {
+				$player_id = $db->lastInsertId("player_id_seq");
+				Highscores::SaveHighscore(
+					$player_id,
+					Date::Today(),
+					$crawl
+				);
+			}
+		}
+		else {
+			$sql = "
+			UPDATE player
+			SET active = true
+			WHERE id = ?
+			";
+			$query = $db->prepare($sql);
+			$query->execute([
+				$id
+			]);
+		}
 		
 		if ($query->rowCount() != 0) {
-			$player_id = $db->lastInsertId("player_id_seq");
-			Highscores::SaveHighscore(
-				$player_id,
-				Date::Today(),
-				$crawl
-			);
-			return $player_id;
+			return true;
 		}
 		else {
 			return false;
@@ -73,6 +91,7 @@ class Players {
 		global $db;
 		$sql = "
 		SELECT count(*) FROM player
+		WHERE active
 		";
 		$query = $db->prepare($sql);
 		$query->execute();

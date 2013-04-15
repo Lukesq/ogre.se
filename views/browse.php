@@ -86,8 +86,8 @@ function color($num) {
 		<td>
 			<?php
 			$diff = 0;
-			if (isset($old[$key])) {
-				$diff = $old[$key]["rank"] - $rank;
+			if (isset($old[$name])) {
+				$diff = $old[$name]["rank"] - $rank;
 			}
 			echo number_format(
 				$rank
@@ -103,23 +103,23 @@ function color($num) {
 		</td>
 		<td>
 			<?php
-			$link = "?date=$to";
+			$link = "?date=" . date("Y-m-d", strtotime($to));
 			if ($type == "player") {
-				$link = "/browse/skill/$key" . $link;
+				$link = "/browse/skill/$name" . $link;
 			}
 			else {
-				$link = "/browse/player/" . strtolower(str_replace(" ", "_", $key)) . $link;
+				$link = "/browse/player/" . strtolower(str_replace(" ", "_", $name)) . $link;
 			}
 			?> 
 			<a href="<?= $link; ?>">
-				<pre><?= ucwords($key); ?></pre>
+				<pre><?= ucwords($name); ?></pre>
 			</a>
 		</td>
 		<td>
 			<?php
 			$diff = 0;
-			if (isset($old[$key])) {
-				$diff = $level - $old[$key]["level"];
+			if (isset($old[$name])) {
+				$diff = $level - $old[$name]["level"];
 			}
 			echo number_format(
 				$level
@@ -128,7 +128,7 @@ function color($num) {
 		</td>
 		<td>
 			<?php
-			if ($title == "overall" or (!empty($key) and $key == "overall")) {
+			if ($title == "overall" or (!empty($name) and $name == "overall")) {
 				$done = round(
 					($level / 2277)
 					* 100
@@ -155,8 +155,8 @@ function color($num) {
 		<td>
 			<?php
 			$diff = 0;
-			if (isset($old[$key])) {
-				$diff = $xp - $old[$key]["xp"];
+			if (isset($old[$name])) {
+				$diff = $xp - $old[$name]["xp"];
 			}
 			echo number_format(
 				$xp
