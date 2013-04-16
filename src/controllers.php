@@ -2,22 +2,6 @@
 require_once "utils.php";
 require_once "pkg/route/route.php";
 
-function __autoload($class) {
-	if (file_exists($path = "../src/models/" . strtolower($class) . ".php")) {
-		require_once $path;
-	}
-}
-
-define(
-	"REQUEST", 
-	$_SERVER["REQUEST_METHOD"]
-);
-define(
-	"DATE",
-	isset($_GET["date"]) ? date("Y-m-d", strtotime($_GET["date"]))
-		: Date::Today("-4 hours")
-);
-
 Router::AddRoutes([
 	"/error"                  => ["function" => "Error"],
 	"/:function/:type/:param" => ["class" => "Highscore", "function" => "Browse", "type" => "skill", "param" => "overall"]
@@ -34,8 +18,11 @@ function Error() {
 class Highscore {
 	static function Browse($args) {
 		extract($args);
-		$from = Date::Yesterday(DATE) . " 04:00";
-		$to = DATE . " 04:00";
+		$date = isset($_GET["date"]) ? date("Y-m-d", strtotime($_GET["date"]))
+			: Date::Today("-4 hours");
+		
+		$from = Date::Yesterday($date) . " 04:00";
+		$to = $date . " 04:00";
 	
 		switch ($type) {
 		case "player":
@@ -82,7 +69,8 @@ class Highscore {
 
 	static function Register() {
 		$data = [];
-		if (REQUEST == "POST") {
+		$request = $_SERVER["REQUEST_METHOD"];
+		if ($request == "POST") {
 			$data["success"] = Players::AddPlayer($name = &$_POST["name"]);
 			if ($data["success"]) {
 				header("Refresh: 2; url=/");
