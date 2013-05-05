@@ -96,17 +96,16 @@
 				GitHub
 			</a>
 		</li>
-		<li>/</li>
-		<li>
-			<a target="_blank" href="http://webchat.quakenet.org/?channels=runescape.se">
-				#runescape.se @ QuakeNet
-			</a>
-		</li>
 		
 		</ul>
+		<div class="ogre">
+			<img src="/img/ogre.png" width="64" height="85" title="Because fuck you, that's why!"/>
+		</div>
 	</div>
 	
-	<script src="/js/lib/jquery-1.9.1.min.js"></script>
+	<script src="/js/lib/jquery.min.js"></script>
+	<script src="/js/lib/jquery.tablesorter.min.js"></script>
+	
 	<script src="/js/main.js"></script>
 	
 	</body>

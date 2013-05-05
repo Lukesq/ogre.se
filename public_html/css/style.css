@@ -187,6 +187,22 @@ input, button {
 	padding: 4px;
 	text-align: left;
 }
+#highscore th {
+	cursor: pointer;
+}
+#highscore thead span {
+	height: 4px;
+	margin-top: 5px;
+	margin-left: 5px;
+	position: absolute;
+	width: 8px;
+}
+#highscore thead .tablesorter-headerAsc span {
+	background: url(../img/sort_asc.png) no-repeat;
+}
+#highscore thead .tablesorter-headerDesc span {
+	background: url(../img/sort_desc.png) no-repeat;
+}
 #highscore .empty {
 	padding-top: 20px;
 	text-align: center;
@@ -250,4 +266,7 @@ input, button {
 #footer li {
 	display: inline;
 	margin: 0px 5px;
+}
+#footer .ogre {
+	margin-top: 40px;
 }

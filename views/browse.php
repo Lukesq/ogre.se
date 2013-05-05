@@ -49,28 +49,35 @@ function color($num) {
 		
 		<th width="50">
 			Rank
+			<span></span>
 		</th>
 		<th width="50">
 			+ / -
+			<span></span>
 		</th>
 		<th width="90">
 			<?php
 			echo ($type == "skill") ? "Name" 
 				: "Skill";
 			?> 
+			<span></span>
 		</th>
-		<th width="30">
+		<th width="35">
 			Level
+			<span></span>
 		</th>
-		<th width="60"></th>
+		<th width="55"></th>
 		<th width="35">
 			+ / -
+			<span></span>
 		</th>
 		<th width="75">
 			XP
+			<span></span>
 		</th>
 		<th width="65">
 			+ / -
+			<span></span>
 		</th>
 		
 		</tr>

@@ -22,6 +22,8 @@ class Highscores {
 			) AS highscore
 			JOIN highscore_stats
 				ON highscore_id = highscore.id
+			ORDER BY
+				highscore_stats.id
 			";
 			break;
 		
