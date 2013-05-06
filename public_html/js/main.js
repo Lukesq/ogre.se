@@ -1,5 +1,8 @@
 $(document).ready(function() {
-	$("#highscore").tablesorter({sortInitialOrder: "desc"});
+	$("#highscore").tablesorter({
+		sortInitialOrder: "desc",
+		sortList: [[0,0]]
+	});
 	var list = $("#skills .list");
 	$("html").click(
 		function() {
