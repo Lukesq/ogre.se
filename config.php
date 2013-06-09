@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set("Europe/Stockholm");
+date_default_timezone_set("US/Eastern");
 
 global $config;
 $config = [
